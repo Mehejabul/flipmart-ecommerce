@@ -34,6 +34,26 @@
 
                 </li>
 
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i data-feather="monitor"></i>
+                        <span data-key="t-apps">Banner</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li>
+                            <a href="{{ route('banner.index') }}">
+                                <span  data-key="t-calendar">All Banner</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('banner.create') }}">
+                                <span data-key="t-chat">Add Banner</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                </li>
+
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow">

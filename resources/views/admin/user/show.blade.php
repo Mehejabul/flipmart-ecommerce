@@ -14,9 +14,9 @@
     <div class="col-12">
         <div class="card border border-primary">
             <div class="card-header bg-transparent border-primary d-flex justify-content-between">
-                <h5 class="my-0 text-primary align-middle"><i class="mdi mdi-bullseye-arrow me-3"></i>All Users </h5>
-                <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary waves-effect waves-light">
-                    <i class="bx bx-list-plus font-size-20 align-middle me-2"></i> Create User
+                <h5 class="my-0 text-primary align-middle"><i class="mdi mdi-bullseye-arrow me-3"></i>View Users </h5>
+                <a href="{{ route('user.index') }}" class="btn btn-sm btn-primary waves-effect waves-light">
+                    <i class="bx bx-list-plus font-size-20 align-middle me-2"></i> All User
                 </a>
             </div>
             <div class="card-body">
@@ -32,24 +32,24 @@
                             <tbody>
                                 <tr>
                                     <th>Name :</th>
-                                    <td></td>
+                                    <td>{{ $data->name }}</td>
                                 </tr>
                                 <tr>
                                     <th>Email :</th>
-                                    <td></td>
+                                    <td>{{ $data->email }}</td>
                                 </tr>
                                 <tr>
                                     <th>Phone :</th>
-                                    <td></td>
+                                    <td>{{ $data->phone }}</td>
                                 </tr>
                                 <tr>
                                     <th>Role :</th>
-                                    <td></td>
+                                    <td>{{ $data->role }}</td>
                                 </tr>
                                 <tr>
                                     <th>Status :</th>
                                     <td>
-                                        @if ()
+                                        @if ($data->status==1)
                                         <div class="badge badge-soft-success font-size-12">Active</div>
                                         @else
                                         <div class="badge badge-soft-danger font-size-12">Disabled</div>
@@ -59,7 +59,7 @@
                                 </tr>
                                 <tr>
                                     <th>Address :</th>
-                                    <td></td>
+                                    <td>{{ $data->address }}</td>
                                 </tr>
                             </tbody>
                         </table>

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\ManageController;
 /*
 |--------------------------------------------------------------------------
@@ -37,11 +38,27 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function() {
 Route::get('/user',[UserController::class, 'index'])->name('user.index');
 Route::get('/user/create',[UserController::class, 'create'])->name('user.create');
 Route::post('/user',[UserController::class,'store'])->name('user.store');
-Route::get('/user/show/{id}',[UserController::class,'show'])->name('user.show');
+Route::get('/user/show/{slug}',[UserController::class,'show'])->name('user.show');
 Route::get('/user/edit/{slug}',[UserController::class,'edit'])->name('user.edit');
 Route::put('/user/{slug}',[UserController::class,'update'])->name('user.update');
-Route::post('/user/softdel/{slug}',[UserController::class,'softdel'])->name('user.softdel');
+Route::get('/user/softdel/{slug}',[UserController::class,'softdel'])->name('user.softdel');
 Route::delete('/user/{slug}',[UserController::class,'delete'])->name('user.delete');
+
+    //Baneer Controller
+Route::get('/banner',[BannerController::class,'index'])->name('banner.index');
+Route::get('/banner/create',[BannerController::class,'create'])->name('banner.create');
+Route::post('/banner',[BannerController::class,'store'])->name('banner.store');
+Route::get('/banner/show/{slug}',[BannerController::class,'show'])->name('banner.show');
+Route::get('/banner/edit/{slug}',[BannerController::class,'edit'])->name('banner.edit');
+Route::put('/banner/{slug}',[BannerController::class,'update'])->name('banner.update');
+Route::post('/banner/softdel/{slug}',[BannerController::class,'softdel'])->name('banner.softdel');
+Route::delete('/banner/{slug}',[BannerController::class,'delete'])->name('banner.delete');
+
+
+
+
+
+
 
 
 });

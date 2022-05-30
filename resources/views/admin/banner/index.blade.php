@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-12">
         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-            <h4 class="mb-sm-0 font-size-18">User</h4>
+            <h4 class="mb-sm-0 font-size-18">Banner</h4>
         </div>
     </div>
 </div>
@@ -14,37 +14,42 @@
     <div class="col-12">
         <div class="card border border-primary">
             <div class="card-header bg-transparent border-primary d-flex justify-content-between">
-                <h5 class="my-0 text-primary align-middle"><i class="mdi mdi-bullseye-arrow me-3"></i>All Users </h5>
-                <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary waves-effect waves-light">
-                    <i class="bx bx-list-plus font-size-20 align-middle me-2"></i> Create User
+                <h5 class="my-0 text-primary align-middle"><i class="mdi mdi-bullseye-arrow me-3"></i>All Banner </h5>
+                <a href="{{ route('banner.create') }}" class="btn btn-sm btn-primary waves-effect waves-light">
+                    <i class="bx bx-list-plus font-size-20 align-middle me-2"></i> Add User
                 </a>
             </div>
             <div class="card-body">
                 <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
-                    <thead class="text-center">
+                    <thead class="">
                         <tr>
-                            <th>Name</th>
-                            <th>Phone</th>
-                            <th>Email</th>
+                            <th>Image</th>
+                            <th>Title</th>
+                            <th>Middle Title</th>
+                            <th>Sub Title</th>
+                            <th>Banner Button</th>
                             <th>Status</th>
-                            <th>Role</th>
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody class="text-center">
-                        @foreach($all as $data)
+                    <tbody class="">
+                        @foreach ($all as $data )
                         <tr>
-                            <td>{{ $data['name'] }}</td>
-                            <td>{{ $data['phone'] }}</td>
-                            <td>{{ $data['email'] }}</td>
                             <td>
-                                @if ($data->status == 1)
+                                <img id="banner_image_preview" src="{{ asset('uploads/banner/' .$data->banner_image) }}"
+                                    alt="banner image" width="50px;">
+                            </td>
+                            <td>{{ $data->banner_title }}</td>
+                            <td>{{ $data->banner_mid_title }}</td>
+                            <td>{{ $data->banner_subtitle }}</td>
+                            <td>{{ $data->banner_button }}</td>
+                            <td>
+                                @if ($data->banner_status == 1)
                                 <div class="badge badge-soft-success font-size-12">Active</div>
                                 @else
                                 <div class="badge badge-soft-danger font-size-12">Disabled</div>
                                 @endif
                             </td>
-                            <td>{{ $data['role'] }}</td>
                             <td>
                                 <div class="btn-group" role="group">
                                     <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
@@ -53,55 +58,29 @@
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="">
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('user.show',$data->slug) }}">
+                                            <a class="dropdown-item" href="#">
                                                 <i class="bx bx-show-alt"></i>view</a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('user.edit',$data->slug) }}">
+                                            <a class="dropdown-item" href="{{ route('banner.edit',$data->banner_slug) }}">
                                                 <i class="bx bx-edit-alt"></i>Edite</a>
                                         </li>
                                         <li>
-                                            {{--  <a class="dropdown-item" href="" id="delete" data-bs-toggle="modal"
-                                                data-bs-target="#softDeleteModal" data-id="{{ $data['id'] }}"> <i
-                                                    class="dripicons-trash"></i>Delete
-                                            </a>  --}}
-                                            <button class="dropdown-item " class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#softdelete{{ $data->id }}"><i
-                                                class="dripicons-trash"></i> Delete</button>
+                                            <a class="dropdown-item" href="#">
+                                                <i class="bx bx-trash-alt"></i>Delete</a>
                                         </li>
                                     </ul>
                                 </div>
                             </td>
                         </tr>
-                        {{--  Modal  --}}
-                        <div class="modal fade" id="softdelete{{ $data->id }}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                                <div class="modal-header bg-dnager">
-                                  <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                                <div class="modal-body">
-                                  <h5>Are you want to delete this Iteam??</h5>
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                  <a  href="{{ route('user.softdel',$data->slug) }}" class="btn btn-danger">Understood</a>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
                         @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
-    </div>
-</div>
-
-<!-- end row -->
-@include('admin.includes.delete_aleart')
+        <!-- end cardaa -->
+    </div> <!-- end col -->
+</div> <!-- end row -->
 @endsection
 
 

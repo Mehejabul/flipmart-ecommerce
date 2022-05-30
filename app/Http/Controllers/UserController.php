@@ -69,9 +69,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id){
-        $alls = User::where('status',1)->where('id',$id)->get();
-    return view("admin.user.show",compact('alls'));
+    public function show($slug){
+        $data = User::where('status',1)->where('slug',$slug)->firstorFail();
+    return view("admin.user.show",compact('data'));
     }
 
     /**
@@ -131,6 +131,21 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function softdel($slug){
+        
+     $softdelet = User::where('status', 1)->where('slug', $slug)->update([
+      'status' => 0,
+      'updated_at' => Carbon::now()->toDateTimestring(),
+     ]);
+     
+     if($softdelet){
+       Session::flash('success', 'Successfuly delete');
+       return redirect()->back();
+     }else{
+         Session::flash('error', 'Opps! Delete error');
+         return redirect()->back();
+     }
+    }
     public function destroy($id)
     {
         //
