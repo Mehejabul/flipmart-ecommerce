@@ -43,17 +43,20 @@
 
                 </script>
                 @endif
-                <form method="POST" action="{{ route('banner.update', $data->banner_slug) }}" enctype="multipart/form-data">
-                  @method('PUT')
-                  @csrf
+                <form method="POST" action="{{ route('banner.update', $data->banner_slug) }}"
+                    enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group" {{$errors->has('banner_title') ? ' has-error':''}}>
                                 <div class="mb-3">
                                     <label class="form-label"><strong class="text-primary">Banner Title<span
                                                 class="text-danger">*</span>:</strong></label>
+                                   <input type="hidden" class="form-control" name="banner_id"
+                                                value="{{ $data->banner_id }}">
                                     <input type="text" class="form-control" name="banner_title"
-                                        value="{{ old('banner_title') }}">
+                                        value="{{ $data->banner_title }}">
                                 </div>
                                 @if ($errors->has('banner_title'))
                                 <span class="error">{{ $errors->first('banner_title') }}</span>
@@ -66,7 +69,7 @@
                                     <label class="form-label"><strong class="text-primary">Banner Middle Title<span
                                                 class="text-danger">*</span>:</strong></label>
                                     <input type="text" class="form-control" name="banner_mid_title"
-                                        value="{{ old('banner_mid_title') }}">
+                                        value="{{ $data->banner_mid_title }}">
                                 </div>
                                 @if ($errors->has('banner_mid_title'))
                                 <span class="error">{{ $errors->first('banner_mid_title') }}</span>
@@ -79,7 +82,7 @@
                                     <label class="form-label"><strong class="text-primary">Banner Sub Title<span
                                                 class="text-danger">*</span>:</strong></label>
                                     <input type="text" class="form-control" name="banner_subtitle"
-                                        value="{{ old('banner_subtitle') }}">
+                                        value="{{ $data->banner_subtitle }}">
                                 </div>
                                 @if ($errors->has('banner_subtitle'))
                                 <span class="error">{{ $errors->first('banner_subtitle') }}</span>
@@ -92,7 +95,7 @@
                                     <label class="form-label"><strong class="text-primary">Banner Url<span
                                                 class="text-danger">*</span>:</strong></label>
                                     <input type="text" class="form-control" name="banner_url"
-                                        value="{{ old('banner_url') }}">
+                                        value="{{ $data->banner_url }}">
                                 </div>
                                 @if ($errors->has('banner_url'))
                                 <span class="error">{{ $errors->first('banner_url') }}</span>
@@ -105,7 +108,7 @@
                                     <label class="form-label"><strong class="text-primary">Banner Button<span
                                                 class="text-danger">*</span>:</strong></label>
                                     <input type="text" class="form-control" name="banner_button"
-                                        value="{{ old('banner_button') }}">
+                                        value="{{ $data->banner_button }}">
                                 </div>
                                 @if ($errors->has('banner_button'))
                                 <span class="error">{{ $errors->first('banner_button') }}</span>
@@ -118,7 +121,7 @@
                                     <label class="form-label"><strong class="text-primary">Banner Order<span
                                                 class="text-danger">*</span>:</strong></label>
                                     <input type="integer" class="form-control" name="banner_order"
-                                        value="{{ old('banner_order') }}">
+                                        value="{{ $data->banner_order }}">
                                 </div>
                                 @if ($errors->has('banner_order'))
                                 <span class="error">{{ $errors->first('banner_order') }}</span>
@@ -133,7 +136,7 @@
                                             <label class="form-label"><strong class="text-primary">Banner
                                                     Image</strong></label>
                                             <input type="file" id="banner_image_input" class="form-control"
-                                                name="banner_image" value="{{ old('banner_image') }}">
+                                                name="banner_image" value="{{ $data->banner_image }}">
                                         </div>
                                         @if ($errors->has('banner_image'))
                                         <span class="error text-danger">{{ $errors->first('banner_image') }}</span>
@@ -141,13 +144,19 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-4 m-auto">
+                                    @if($data->banner_image)
+                                    <img id="banner_image_preview"
+                                        src="{{ asset('uploads/banner/'.$data->banner_image) }}" width="100"
+                                        alt="banner_image">
+                                    @else
                                     <img id="banner_image_preview" src="{{ asset('uploads/no-entry.png') }}"
                                         alt="banner_image" class="img-fluid rounded" width="100" />
+                                    @endif
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary w-md">Submit</button>
+                            <button type="submit" class="btn btn-primary w-md">Update</button>
                         </div>
                 </form>
             </div>

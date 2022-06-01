@@ -9,7 +9,6 @@
     </div>
 </div>
 <!-- end page title -->
-
 <div class="row">
     <div class="col-12">
         <div class="card border border-primary">
@@ -61,37 +60,39 @@
                                                 <i class="bx bx-edit-alt"></i>Edite</a>
                                         </li>
                                         <li>
-                                            {{--  <a class="dropdown-item" href="" id="delete" data-bs-toggle="modal"
-                                                data-bs-target="#softDeleteModal" data-id="{{ $data['id'] }}"> <i
-                                                    class="dripicons-trash"></i>Delete
-                                            </a>  --}}
-                                            <button class="dropdown-item " class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#softdelete{{ $data->id }}"><i
-                                                class="dripicons-trash"></i> Delete</button>
+                                            <a class="dropdown-item  btn-link delete-modal" href=""
+                                                data-bs-toggle="modal" data-value=""
+                                                data-bs-target="#deleteModal{{ $data->id }}"> <i
+                                                    class="dripicons-trash"></i> Delete</a>
                                         </li>
                                     </ul>
                                 </div>
                             </td>
                         </tr>
                         {{--  Modal  --}}
-                        <div class="modal fade" id="softdelete{{ $data->id }}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal fade" id="deleteModal{{ $data->id }}" data-bs-backdrop="static"
+                            data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog">
-                              <div class="modal-content">
-                                <div class="modal-header bg-dnager">
-                                  <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                                <div class="modal-body">
-                                  <h5>Are you want to delete this Iteam??</h5>
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                  <a  href="{{ route('user.softdel',$data->slug) }}" class="btn btn-danger">Understood</a>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel">Are you sure?</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-hidden="true"></button>
+                                    </div> <!-- end modal header -->
+                                    <div class="modal-body">
+                                        Do you really want to delete these records? This process cannot be undone.
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a type="submit" href="{{ route('user.softdel',$data->slug) }}"
+                                            class="btn btn-danger" name="delete_data">Yes,
+                                            delete it
+                                        </a>
+                                        <a type="button" class="btn btn-primary"
+                                            data-bs-dismiss="modal">Cancel</a>
+                                    </div> <!-- end modal footer -->
+                                </div> <!-- end modal content-->
+                            </div> <!-- end modal dialog-->
+                        </div>
                         @endforeach
                     </tbody>
                 </table>
@@ -99,9 +100,7 @@
         </div>
     </div>
 </div>
-
 <!-- end row -->
-@include('admin.includes.delete_aleart')
 @endsection
 
 

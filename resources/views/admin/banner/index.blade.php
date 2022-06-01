@@ -58,7 +58,7 @@
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="">
                                         <li>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="{{ route('banner.show', $data->banner_slug) }}">
                                                 <i class="bx bx-show-alt"></i>view</a>
                                         </li>
                                         <li>
@@ -66,13 +66,39 @@
                                                 <i class="bx bx-edit-alt"></i>Edite</a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="#">
-                                                <i class="bx bx-trash-alt"></i>Delete</a>
+                                            <a class="dropdown-item  btn-link delete-modal" href=""
+                                            data-bs-toggle="modal" data-value=""
+                                            data-bs-target="#deleteModal{{ $data->banner_id }}"> <i
+                                                class="dripicons-trash"></i> Delete</a>
                                         </li>
                                     </ul>
                                 </div>
                             </td>
                         </tr>
+                                  {{--  Modal  --}}
+                                  <div class="modal fade" id="deleteModal{{ $data->banner_id }}" data-bs-backdrop="static"
+                                    data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="staticBackdropLabel">Are you sure?</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-hidden="true"></button>
+                                            </div> <!-- end modal header -->
+                                            <div class="modal-body">
+                                                Do you really want to delete these records? This process cannot be undone.
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a type="submit" href="{{ route('banner.softdel',$data->banner_slug) }}"
+                                                    class="btn btn-danger" name="delete_data">Yes,
+                                                    delete it
+                                                </a>
+                                                <a type="button" class="btn btn-primary"
+                                                    data-bs-dismiss="modal">Cancel</a>
+                                            </div> <!-- end modal footer -->
+                                        </div> <!-- end modal content-->
+                                    </div> <!-- end modal dialog-->
+                                </div>
                         @endforeach
                     </tbody>
                 </table>

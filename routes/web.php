@@ -51,7 +51,7 @@ Route::post('/banner',[BannerController::class,'store'])->name('banner.store');
 Route::get('/banner/show/{slug}',[BannerController::class,'show'])->name('banner.show');
 Route::get('/banner/edit/{slug}',[BannerController::class,'edit'])->name('banner.edit');
 Route::put('/banner/{slug}',[BannerController::class,'update'])->name('banner.update');
-Route::post('/banner/softdel/{slug}',[BannerController::class,'softdel'])->name('banner.softdel');
+Route::get('/banner/softdel/{slug}',[BannerController::class,'softdel'])->name('banner.softdel');
 Route::delete('/banner/{slug}',[BannerController::class,'delete'])->name('banner.delete');
 
 
