@@ -5,6 +5,7 @@ use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ManageController;
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +31,7 @@ Route::get('/',[WebsiteController::class,'index'])->name('website.index');
 // })->middleware(['auth'])->name('dashboard');
 
 
-Route::group(['prefix' => 'admin','middleware' => ['auth']], function() {
+Route::group(['prefix' => 'dashboard','middleware' => ['auth']], function() {
     Route::get('/',[AdminController::class, 'index']);
 
     // User controller
@@ -53,6 +54,24 @@ Route::get('/banner/edit/{slug}',[BannerController::class,'edit'])->name('banner
 Route::put('/banner/{slug}',[BannerController::class,'update'])->name('banner.update');
 Route::get('/banner/softdel/{slug}',[BannerController::class,'softdel'])->name('banner.softdel');
 Route::delete('/banner/{slug}',[BannerController::class,'delete'])->name('banner.delete');
+
+//Brand Controller
+Route::get('/brand',[BrandController::class,'index'])->name('brand.index');
+Route::get('/brand/create',[BrandController::class,'create'])->name('brand.create');
+Route::post('/brand',[BrandController::class,'store'])->name('brand.store');
+Route::get('/brand/show/{slug}',[BrandController::class,'show'])->name('brand.show');
+Route::get('/brand/edit/{slug}',[BrandController::class,'edit'])->name('brand.edit');
+Route::put('/brand/{slug}',[BrandController::class,'update'])->name('brand.update');
+Route::get('/brand/softdelet/{slug}',[BrandController::class,'softdelet'])->name('brand.softdelet');
+Route::delete('/brand/{slug}',[BrandController::class,'delete'])->name('brand.delete');
+
+
+
+
+
+
+
+
 
 
 

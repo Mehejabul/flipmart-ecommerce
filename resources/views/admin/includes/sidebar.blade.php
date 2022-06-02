@@ -36,6 +36,36 @@
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow">
+                        <i data-feather="shopping-cart"></i>
+                        <span data-key="t-apps">Product</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li>
+                            <a href="">
+                                <span  data-key="t-calendar">Add New Prodact</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <span data-key="t-chat">All Product</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <span data-key="t-chat">Category</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('brand.index') }}">
+                                <span data-key="t-chat">Brand</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                </li>
+
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
                         <i data-feather="monitor"></i>
                         <span data-key="t-apps">Banner</span>
                     </a>

@@ -61,7 +61,7 @@ class BannerController extends Controller
         if($request->hasfile('banner_image')){
             $image = $request->file('banner_image');
             $ban_img = 'banner' . time() . '.' . $image->getClientOriginalExtension();
-            Image::make($image)->resize(250,250)->save('uploads/banner/' . $ban_img);
+            Image::make($image)->resize(250,250)->save('uploads/brand/' . $ban_img);
             }else{
                 $ban_img = $basic->banner_image;
             }
