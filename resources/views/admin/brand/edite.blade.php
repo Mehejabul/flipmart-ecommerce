@@ -11,91 +11,16 @@
 <!-- end page title -->
 
 <div class="row">
-    <div class="col-lg-8">
-        <div class="card border border-primary">
-            <div class="card-header bg-transparent border-primary d-flex justify-content-between">
-                <h5 class="my-0 text-primary align-middle"><i class="mdi mdi-bullseye-arrow me-3"></i>All Brand Iteam
-                </h5>
-            </div>
-            <div class="card-body">
-                <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
-                    <thead class="text-center">
-                        <tr>
-                            <th>Name</th>
-                            <th>Image</th>
-                            <th>action</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-center">
-                        @foreach ($brands as $data )
-                        <tr>
-                            <td>{{ $data->brand_name }}</td>
-                            <td>
-                                @if($data->brand_image)
-                                <img id="brand_image_preview" src="{{ asset('uploads/brand/' .$data->brand_image) }}"
-                                alt="brand_image" width="50px;">
-                                @else
-                                <img id="brand_image_preview" src="{{ asset('uploads/no-entry.png') }}"
-                                alt="brand_image" width="50px;">
-                                @endif
-                            </td>
-                            <td>
-                                <div class="btn-group" role="group">
-                                    <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        Manage <i class="mdi mdi-chevron-down"></i>
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="">
-                                        <li>
-                                            <a class="dropdown-item" href="{{ route('brand.edit',$data->brand_slug) }}">
-                                                <i class="bx bx-edit-alt"></i>Edite</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item  btn-link delete-modal" href=""
-                                            data-bs-toggle="modal" data-value=""
-                                            data-bs-target="#deleteModal{{ $data->brand_slug }}"> <i
-                                                class="dripicons-trash"></i> Delete</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        {{--  Modal  --}}
-                        <div class="modal fade" id="deleteModal{{ $data->brand_slug }}" data-bs-backdrop="static" data-bs-keyboard="false"
-                            tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="staticBackdropLabel">Are you sure?</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-hidden="true"></button>
-                                    </div> <!-- end modal header -->
-                                    <div class="modal-body">
-                                        Do you really want to delete these records? This process cannot be undone.
-                                    </div>
-                                    <div class="modal-footer">
-                                        <a type="submit" href="{{ route('brand.softdelet', $data->brand_slug) }}" class="btn btn-danger" name="delete_data">Yes,
-                                            delete it
-                                        </a>
-                                        <a type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</a>
-                                    </div> <!-- end modal footer -->
-                                </div> <!-- end modal content-->
-                            </div> <!-- end modal dialog-->
-                        </div>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <!-- end cardaa -->
-    </div> <!-- end col -->
-    <div class="col-lg-4">
+    <div class="col-lg-12">
         <div class="row">
             <div class="col-12">
                 <div class="card border border-primary">
                     <div class="card-header bg-transparent border-primary d-flex justify-content-between">
-                        <h5 class="my-0 text-primary align-middle"><i class="mdi mdi-bullseye-arrow me-3"></i>Create New
-                            Brand </h5>
+                        <h5 class="my-0 text-primary align-middle"><i class="mdi mdi-bullseye-arrow me-3"></i>Update brand
+                         </h5>
+                         <a href="{{ route('brand.index') }}" class="btn btn-sm btn-primary waves-effect waves-light">
+                            <i class="bx bx-list-plus font-size-20 align-middle me-2"></i> All Brands
+                        </a>
                     </div>
                     <div class="card-body">
                         @if(Session::has('success'))
@@ -121,8 +46,10 @@
 
                         </script>
                         @endif
-                        <form method="POST" action="{{ route('brand.store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('brand.update',$data->brand_slug) }}" enctype="multipart/form-data">
+
                             @csrf
+                            @method('put')
                             <div class="row">
                                 <div class="col-lg-12 my-2">
                                     <div class="form-group" {{$errors->has('brand_name') ? ' has-error':''}}>
@@ -130,7 +57,7 @@
                                             <label class="form-label"><strong class="text-primary">Name<span
                                                         class="text-danger">*</span>:</strong></label>
                                             <input type="text" class="form-control" name="brand_name"
-                                                value="{{ old('brand_name') }}">
+                                                value="{{ $data->brand_name }}">
                                         </div>
                                         @if ($errors->has('brand_name'))
                                         <span class="error">{{ $errors->first('brand_name') }}</span>
@@ -145,7 +72,7 @@
                                             <label class="form-label"><strong class="text-primary">Brand Remarks<span
                                                         class="text-danger">*</span>:</strong></label>
                                             <input type="text" class="form-control" name="brand_remarks"
-                                                value="{{ old('brand_remarks') }}">
+                                                value="{{ $data->brand_remarks}}">
                                         </div>
                                         @if ($errors->has('brand_remarks'))
                                         <span class="error">{{ $errors->first('brand_remarks') }}</span>
@@ -163,7 +90,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-12 my-2">
-                                    <div class="form-group" {{$errors->has('brand_image	') ? ' has-error':''}}>
+                                    <div class="form-group" {{$errors->has('brand_image') ? ' has-error':''}}>
                                         <div class="mb-3">
                                             <label class="form-label"><strong class="text-primary">Brand
                                                     Image</strong></label>
@@ -171,20 +98,25 @@
                                                 name="brand_image" value="{{ old('brand_image') }}">
                                         </div>
                                         @if ($errors->has('brand_image '))
-                                        <span class="error text-danger">{{ $errors->first('brand_image	') }}</span>
+                                        <span class="error text-danger">{{ $errors->first('brand_image') }}</span>
                                         @endif
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-12 my-2">
+                                <div class="col-lg-12 my-2 text-center">
+                                    @if($data->brand_image)
+                                    <img id="brand_image_preview" src="{{ asset('uploads/brand/' .$data->brand_image) }}"
+                                        alt="brand_image" class="img-fluid rounded" width="100" />
+                                   @else
                                     <img id="brand_image_preview" src="{{ asset('uploads/no-entry.png') }}"
                                         alt="brand_image" class="img-fluid rounded" width="100" />
+                                    @endif
                                 </div>
                             </div>
 
                     <div class="form-group my-2 text-center">
-                        <button type="submit" class="btn btn-primary w-md">Submit</button>
+                        <button type="submit" class="btn btn-primary w-md">Update</button>
                     </div>
                     </form>
                 </div>
