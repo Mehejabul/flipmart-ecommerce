@@ -51,7 +51,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="">
+                            <a href="{{ route('product.category.index') }}">
                                 <span data-key="t-chat">Category</span>
                             </a>
                         </li>

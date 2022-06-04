@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('pro_cate_image',50)->nullable();
             $table->integer('pro_cate_order')->nullable();
             $table->integer('pro_cate_creator');
-            $table->integer('pro_cate_editor');
+            $table->integer('pro_cate_editor')->nullable();
             $table->string('pro_cate_slug');
             $table->integer('pro_cate_status')->default(1);
             $table->timestamps();
