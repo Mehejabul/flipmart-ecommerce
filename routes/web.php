@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ManageController;
 /*
@@ -65,6 +66,16 @@ Route::get('/brand/edit/{slug}',[BrandController::class,'edit'])->name('brand.ed
 Route::put('/brand/{slug}',[BrandController::class,'update'])->name('brand.update');
 Route::get('/brand/softdelet/{slug}',[BrandController::class,'softdelet'])->name('brand.softdelet');
 Route::delete('/brand/{slug}',[BrandController::class,'delete'])->name('brand.delete');
+
+//product Controller
+Route::get('/product',[ProductController::class,'index'])->name('product.index');
+Route::get('/product/create',[ProductController::class,'create'])->name('product.create');
+Route::post('/product',[ProductController::class,'store'])->name('product.store');
+Route::get('/product/show/{slug}',[ProductController::class, 'show'])->name('product.show');
+Route::get('/product/edit/{slug}',[ProductController::class, 'edit'])->name('product.name');
+Route::put('/product/{slug}',[ProductController::class, 'update'])->name('product.update');
+Route::get('/product/softdelete/{slug}',[ProductController::class, 'softdelete'])->name('product.softdelete');
+Route::delete('/product/{slug}',[ProductController::class,'delete'])->name('product.delete');
 
 //Product_category Controller
 Route::get('/product/category',[ProductCategoryController::class, 'index'])->name('product.category.index');

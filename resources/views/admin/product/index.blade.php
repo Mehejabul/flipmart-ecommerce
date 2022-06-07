@@ -14,30 +14,30 @@
     <div class="col-12">
         <div class="card border border-primary">
             <div class="card-header bg-transparent border-primary d-flex justify-content-between">
-                <h5 class="my-0 text-primary align-middle"><i class="mdi mdi-bullseye-arrow me-3"></i>All Categories
+                <h5 class="my-0 text-primary align-middle"><i class="mdi mdi-bullseye-arrow me-3"></i>All Product
                 </h5>
-                <a href="{{ route('product.category.create') }}"
+                <a href="{{ route('product.create') }}"
                     class="btn btn-sm btn-primary waves-effect waves-light">
-                    <i class="bx bx-list-plus font-size-20 align-middle me-2"></i> Add Category
+                    <i class="bx bx-list-plus font-size-20 align-middle me-2"></i> Add Product
                 </a>
             </div>
             <div class="card-body">
                 <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
                     <thead class="text-center">
                         <tr>
-                            <th>Icon</th>
-                            <th>Banner</th>
                             <th>Name</th>
-                            <th>Parent Category</th>
-                            <th>Order lavel</th>
+                            <th>Category</th>
+                            <th>Brand</th>
+                            <th>Image</th>
+                            <th>Feature</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody class="text-center">
-                        @foreach ($category as $data )
+                        @foreach ($products as $data )
                         <tr>
                             <td>
-                                @if($data->pro_cate_icon)
+                                {{--  @if($data->pro_cate_icon)
                                 <img id="category_icon_preview" src="{{ asset('uploads/category/icon/'.$data->pro_cate_icon) }}"
                                 alt="icon_image" width="50px;">
                                 @else
@@ -52,11 +52,12 @@
                                 @else
                                 <img id="category_image_preview" src="{{ asset('uploads/no-entry.png') }}"
                                 alt="category_image" class="img-fluid rounded" width="100" />
-                                @endif
+                                @endif  --}}
                             </td>
-                            <td>{{ $data->pro_cate_name }}</td>
-                            <td>{{ $data->cat_parent->pro_cate_name}}</td>
-                            <td>{{ $data->pro_cate_order }}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                             <td>
                                 <div class="btn-group" role="group">
                                     <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
@@ -69,12 +70,12 @@
                                                 <i class="bx bx-show-alt"></i>view</a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('product.category.edit', $data->pro_cate_slug) }}">
+                                            <a class="dropdown-item" href="#">
                                                 <i class="bx bx-edit-alt"></i>Edite</a>
                                         </li>
                                         <li>
                                             <a class="dropdown-item  btn-link delete-modal" href="#"
-                                                data-bs-toggle="modal" data-value="" data-bs-target="#deleteModal{{ $data->pro_cate_slug }}"> <i
+                                                data-bs-toggle="modal" data-value="" data-bs-target="#deleteModal"> <i
                                                     class="dripicons-trash"></i> Delete</a>
                                         </li>
                                     </ul>
@@ -82,7 +83,7 @@
                             </td>
                         </tr>
                         {{--  Modal  --}}
-                        <div class="modal fade" id="deleteModal{{ $data->pro_cate_slug }}" data-bs-backdrop="static" data-bs-keyboard="false"
+                        <div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false"
                             tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -95,7 +96,7 @@
                                         Do you really want to delete these records? This process cannot be undone.
                                     </div>
                                     <div class="modal-footer">
-                                        <a type="submit" href="{{ route('product.category.softdelete', $data->pro_cate_slug) }}" class="btn btn-danger" name="delete_data">Yes,
+                                        <a type="submit" href="#" class="btn btn-danger" name="delete_data">Yes,
                                             delete it
                                         </a>
                                         <a type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</a>

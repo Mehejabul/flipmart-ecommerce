@@ -41,12 +41,12 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li>
-                            <a href="">
+                            <a href="{{ route('product.create') }}">
                                 <span  data-key="t-calendar">Add New Prodact</span>
                             </a>
                         </li>
                         <li>
-                            <a href="">
+                            <a href="{{ route('product.index') }}">
                                 <span data-key="t-chat">All Product</span>
                             </a>
                         </li>
