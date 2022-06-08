@@ -29,35 +29,29 @@
                             <th>Category</th>
                             <th>Brand</th>
                             <th>Image</th>
-                            <th>Feature</th>
+                            <th>unit</th>
+                            <th>Price</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody class="text-center">
                         @foreach ($products as $data )
                         <tr>
-                            <td>
-                                {{--  @if($data->pro_cate_icon)
-                                <img id="category_icon_preview" src="{{ asset('uploads/category/icon/'.$data->pro_cate_icon) }}"
-                                alt="icon_image" width="50px;">
-                                @else
-                                <img id="category_image_preview" src="{{ asset('uploads/no-entry.png') }}"
-                                alt="icon_image" class="img-fluid rounded" width="100" />
-                                @endif
-                            </td>
-                            <td>
-                                @if($data->pro_cate_image)
-                                <img id="category_image_preview" src="{{ asset('uploads/category/image/'.$data->pro_cate_image) }}"
-                                alt="category_image" width="100px;">
-                                @else
-                                <img id="category_image_preview" src="{{ asset('uploads/no-entry.png') }}"
-                                alt="category_image" class="img-fluid rounded" width="100" />
-                                @endif  --}}
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+
+                            <td>{{ $data->product_name }}</td>
+                            <td>{{ $data->category->pro_cate_name}}</td>
+                            <td>{{ $data->brand->brand_name }}</td>
+                                <td>
+                                    @if($data->product_image)
+                                    <img id="product_image_preview" src="{{ asset('uploads/product/'.$data->product_image) }}"
+                                    alt="product_image" width="50px;">
+                                    @else
+                                    <img id="product_image_preview" src="{{ asset('uploads/no-entry.png') }}"
+                                    alt="product_image" class="img-fluid rounded" width="100" />
+                                    @endif
+                                </td>
+                            <td>{{ $data->product_unit }}</td>
+                            <td>{{ $data->product_price }}</td>
                             <td>
                                 <div class="btn-group" role="group">
                                     <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
@@ -66,11 +60,11 @@
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="">
                                         <li>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="{{ route('product.show', $data->product_slug) }}">
                                                 <i class="bx bx-show-alt"></i>view</a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="{{ route('product.edit', $data->product_slug) }}">
                                                 <i class="bx bx-edit-alt"></i>Edite</a>
                                         </li>
                                         <li>

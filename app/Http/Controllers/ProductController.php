@@ -52,7 +52,7 @@ class ProductController extends Controller
             Image::make($image)->resize(250,250)->save('uploads/product/' . $product_img);
         }
 
-        //Brand Feature
+        //PRODUCT Feature
         if($request->product_feature == 'on'){
             $product_feature = 1;
          }else{
@@ -76,7 +76,7 @@ class ProductController extends Controller
             'product_feature' => $product_feature,
             'product_order' => $request->product_order,
             'product_creator' => $creator,
-            'product_slug' => $request->product_slug,
+            'product_slug' => $slug,
             'product_status' => 1,
             'created_at' => Carbon::now()->toDateTimestring(),
          ]);
@@ -97,9 +97,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show($slug) {
+    $data = Product::where('product_status', 1)->where('product_slug', $slug)->firstorFail();
+         return view('admin.product.show', compact('data'));
     }
 
     /**
@@ -108,9 +108,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit($slug){
+     $data = Product::where('product_status', 1)->where('product_slug', $slug)->firstorFail();
+       return view('admin.product.create', compact('data'));
     }
 
     /**
