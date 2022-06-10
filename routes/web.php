@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ManageController;
@@ -66,6 +67,16 @@ Route::get('/brand/edit/{slug}',[BrandController::class,'edit'])->name('brand.ed
 Route::put('/brand/{slug}',[BrandController::class,'update'])->name('brand.update');
 Route::get('/brand/softdelet/{slug}',[BrandController::class,'softdelet'])->name('brand.softdelet');
 Route::delete('/brand/{slug}',[BrandController::class,'delete'])->name('brand.delete');
+
+//Partner controller
+Route::get('/partner',[PartnerController::class,'index'])->name('partner.index');
+Route::get('/partner/create',[Partnercontroller::class,'create'])->name('partner.create');
+Route::post('/partner',[PartnerController::class,'store'])->name('partner.store');
+Route::get('/partner/show/{slug}',[PartnerController::class,'show'])->name('partner.show');
+Route::get('/partner/edit/{slug}',[PartnerController::class,'edit'])->name('partner.edit');
+Route::put('/partner/{slug}',[PartnerController::class,'update'])->name('partner.update');
+Route::get('/partner/softdelete/{slug}',[PartnerController::class,'softdelete'])->name('partner.softdelete');
+Route::delete('/partner',[PartnerController::class,'delete'])->name('partner.delete');
 
 //product Controller
 Route::get('/product',[ProductController::class,'index'])->name('product.index');
