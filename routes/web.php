@@ -9,6 +9,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductCategoryController;
+use App\Http\Controllers\CuponController;
 use App\Http\Controllers\ManageController;
 /*
 |--------------------------------------------------------------------------
@@ -98,7 +99,15 @@ Route::put('/product/category/{slug}',[ProductCategoryController::class, 'update
 Route::get('/product/category/softdelete/{slug}',[ProductCategoryController::class, 'softdelete'])->name('product.category.softdelete');
 Route::delete('/product/category/{slug}',[ProductCategoryController::class, 'store'])->name('product.category.delete');
 
-
+//CuponContoller
+Route::get('/cupon',[CuponController::class,'index'])->name('cupon.index');
+Route::get('/cupon/create',[CuponController::class,'create'])->name('cupon.create');
+Route::post('/cupon',[CuponController::class,'store'])->name('cupon.store');
+Route::get('/cupon/show/{slug}',[CuponController::class,'show'])->name('cupon.show');
+Route::get('/cupon/edit/{slug}',[CuponController::class,'edit'])->name('cupon.edit');
+Route::put('/cupon/{slug}',[CuponController::class,'update'])->name('cupon.update');
+Route::get('/cupon/softdelete/{slug}',[CuponController::class,'softdelete'])->name('cupon.softdelete');
+Route::delete('/cupon/{slug}',[CuponController::class,'delete'])->name('cupon.delete');
 
 
 

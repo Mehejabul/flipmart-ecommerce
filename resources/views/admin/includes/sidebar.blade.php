@@ -128,6 +128,24 @@
                       </ul>
                   </li>
                   <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i data-feather="credit-card"></i>
+                        <span data-key="t-cupon">Cupon</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li>
+                            <a href="{{ route('cupon.index') }}">
+                                <span data-key="t-chat">All Cupon</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('cupon.create') }}">
+                                <span data-key="t-chat">Add Cupon</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                  <li>
                       <a class="dropdown-item" href="{{ route('logout') }}"
                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                           <i data-feather="log-out"></i>
