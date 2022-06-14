@@ -40,14 +40,26 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
+
       $this->validate($request,[
         'product_name' => ['required'],
       ],[
           'product_name.required' =>'Please Inesrt Product Name',
       ]);
-         //Category Image
+
+        //Multiple Image
+        if($request->hasfile('product_gallery')){
+            $gallerys = $request->file('product_gallery');
+            foreach($gallerys as $gallery){
+                $gallery_name = 'pro' . '-' . rand(10000,10000) . '.' . $gallery->getClientOriginalExtension();
+                Image::make($gallery)->resize(120,120)->save('uploads/product/gallery/' . $gallery_name);
+                $data[] = $gallery_name;
+            }
+        }
+
+         //Product Image
          if($request->hasfile('product_image')){
-              $image = $request->file('product_image');
+            $image = $request->file('product_image');
             $product_img = 'product' . time() . '.' . $image->getClientOriginalExtension();
             Image::make($image)->resize(250,250)->save('uploads/product/' . $product_img);
         }
@@ -72,7 +84,7 @@ class ProductController extends Controller
             'product_details' => $request->product_details,
             'product_description' => $request->product_description,
             'product_image' => $product_img,
-            'product_gallery' => $request->product_gallery,
+            'product_gallery' => implode(',', $data),
             'product_feature' => $product_feature,
             'product_order' => $request->product_order,
             'product_creator' => $creator,

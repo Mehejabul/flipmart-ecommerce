@@ -150,8 +150,8 @@ class PartnerController extends Controller
         return redirect()->route('partner.index');
     }
 
-
     }
+
     public function softdelete($slug) {
         $softdel = Partner::where('partner_status',1)->where('partner_slug',$slug)->update([
             'partner_status' => 0,

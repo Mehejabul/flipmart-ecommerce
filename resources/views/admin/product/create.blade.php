@@ -161,21 +161,17 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-12 my-4">
+                            <div class="col-lg-6 my-4">
                                 <div class="form-check form-switch" dir="ltr">
                                     <input name="product_feature" type="checkbox" class="form-check-input">
                                     <label class="form-check-label">Product Feature:</label>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-12  my-2">
+                        <div class="col-lg-6  my-2">
                             <div class="row">
-                                <div class="col-lg-8">
                                     <div class="form-group" {{$errors->has('product_image') ? ' has-error':''}}>
                                         <div class="mb-3">
-                                            <label class="form-label"><strong class="text-primary">Category
-                                                    Icon</strong></label>
+                                            <label class="form-label"><strong class="text-primary">Product Image</strong></label>
                                             <input type="file" id="product_image_input" class="form-control"
                                                 name="product_image" value="{{ old('product_image') }}">
                                         </div>
@@ -183,12 +179,25 @@
                                         <span class="error text-danger">{{ $errors->first('product_image') }}</span>
                                         @endif
                                     </div>
-                                </div>
-                                <div class="col-lg-4 m-auto">
-                                    <img id="product_image_preview" src="{{ asset('uploads/no-entry.png') }}"
-                                        alt="category_icon" class="img-fluid rounded" width="100" />
-                                </div>
                             </div>
+                        </div>
+                        <div class="col-lg-6  my-2">
+                            <div class="row">
+                                    <div class="form-group" {{$errors->has('product_gallery') ? ' has-error':''}}>
+                                        <div class="mb-3">
+                                            <label class="form-label"><strong class="text-primary">Product Gallery</strong></label>
+                                            <input multiple type="file"  class="form-control"
+                                                name="product_gallery[]" value="{{ old('product_gallery') }}">
+                                        </div>
+                                        @if ($errors->has('product_gallery'))
+                                        <span class="error text-danger">{{ $errors->first('product_gallery') }}</span>
+                                        @endif
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 m-auto text-center">
+                            <img id="product_image_preview" src="{{ asset('uploads/no-entry.png') }}"
+                                alt="category_icon" class="img-fluid rounded" width="100" />
                         </div>
                         <div class="col-lg-12 my-2">
                             <div class="form-group" {{$errors->has('product_details') ? ' has-error':''}}>

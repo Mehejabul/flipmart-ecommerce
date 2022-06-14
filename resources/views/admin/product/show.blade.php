@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-12">
         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-            <h4 class="mb-sm-0 font-size-18">User</h4>
+            <h4 class="mb-sm-0 font-size-18">Products</h4>
         </div>
     </div>
 </div>
@@ -83,7 +83,15 @@
                                 </tr>
                                 <tr>
                                     <th>Product Gallery :</th>
-                                    <td></td>
+                                    <td>
+                                        @php
+                                            $images = explode(',',$data->product_gallery)
+                                        @endphp
+                                        @foreach ($images as $val )
+                                        <img src="{{ asset('uploads/product/gallery/' .$val) }}" width="50">
+
+                                        @endforeach
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>Product Creator :</th>
