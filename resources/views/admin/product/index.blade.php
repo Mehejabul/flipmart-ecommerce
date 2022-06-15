@@ -60,8 +60,9 @@
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="">
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('product.show', $data->product_slug) }}">
-                                                <i class="bx bx-show-alt"></i>view</a>
+                                            <a class="dropdown-item" href="#"
+                                            data-bs-toggle="modal" data-bs-target="#myModal">
+                                             <i class="bx bx-show-alt"></i>show</a>
                                         </li>
                                         <li>
                                             <a class="dropdown-item" href="{{ route('product.edit', $data->product_slug) }}">
@@ -76,6 +77,91 @@
                                 </div>
                             </td>
                         </tr>
+
+                        <!-- sample modal content -->
+                        <div id="myModal" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" data-bs-scroll="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-primary">
+                                        <h5 class="modal-title text-light" id="myModalLabel">Product Show</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body m-auto">
+                                       <div class="row form-group">
+                                         <div class="col-lg-6 my-2">
+                                             <label for="product_name">Product Name</label>
+                                             <input disabled class="form-control" type="text" name="product_name" value="{{ $data->product_name }}">
+                                         </div>
+                                         <div class="col-lg-6 my-2">
+                                            <label for="category_name">Category name</label>
+                                            <input disabled class="form-control" type="text" name="pro_cate_id" value="{{ $data->category->pro_cate_name }}">
+                                        </div>
+                                        <div class="col-lg-6 my-2">
+                                            <label for="Brand name">Brand Name</label>
+                                            <input disabled class="form-control" type="text" name="brand_id" value="{{ $data->brand->brand_name }}">
+                                        </div>
+                                        <div class="col-lg-6 my-2">
+                                            <label for="product_price">Product price</label>
+                                            <input disabled class="form-control" type="text" name="product_price" value="{{ $data->product_price }}">
+                                        </div>
+                                        <div class="col-lg-6 my-2">
+                                            <label for="product_discount_price">Product discount</label>
+                                            <input disabled class="form-control" type="text" name="product_discount_price" value="{{ $data->product_discount_price }}">
+                                        </div>
+                                        <div class="col-lg-6 my-2">
+                                            <label for="product_order">Order By</label>
+                                            <input disabled class="form-control" type="text" name="product_order" value="{{ $data->product_order }}">
+                                        </div>
+                                        <div class="col-lg-6 my-2">
+                                            <label for="product_quantity">Product Quantity</label>
+                                            <input disabled class="form-control" type="text" name="product_quantity" value="{{ $data->product_quantity }}">
+                                        </div>
+                                        <div class="col-lg-6 my-2">
+                                            <label for="product_unit">Product Unit</label>
+                                            <input disabled class="form-control" type="text" name="product_unit" value="{{ $data->product_unit }}">
+                                        </div>
+                                        <div class="col-lg-6 my-2">
+                                            <label for="product_creator">Product Creator</label>
+                                            <input disabled class="form-control" type="text" name="product_creator" value="{{ $data->creator->name }}">
+                                        </div>
+                                        <div class="col-lg-6 my-2">
+                                            <label for="product_feature">Product feature</label>
+                                            <input disabled class="form-control" type="text" name="product_feature" value="{{ $data->product_feature == '1' ? 'on' : 'off'}}">
+                                        </div>
+                                        <div class="col-lg-6 my-2">
+                                            <label for="product_status">Product status</label>
+                                            <input disabled class="form-control" type="text" name="product_status" value="{{ $data->product_feature == '1' ? 'active' : 'deactive'}}">
+                                        </div>
+                                        <div class="col-lg-6 my-2">
+                                            <label for="created_time">Created Time</label>
+                                            <input disabled class="form-control" type="text" name="created time" value="{{ $data->created_at->diffForHumans() }}">
+                                        </div>
+                                        <div class="col-md-12 my-2 d-flex">
+                                            <img style="width: 100px" class="m-auto"
+                                                src="{{ asset('uploads/product/' .$data->product_image) }}"
+                                                alt="Product Image">
+                                        </div>
+                                        @php
+                                        $images = explode(',',$data->product_gallery)
+                                        @endphp
+                                        @if ($data['product_gallery'])
+                                        @foreach ($images as $val )
+                                        <div class="col-md-3 my-2 d-flex">
+                                            <img style="width: 200px" class="m-auto"
+                                                src="{{ asset('uploads/product/gallery/' .$val) }}"
+                                                alt="product Image">
+                                        </div>
+                                        @endforeach
+                                        @endif
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
+
                         {{--  Modal  --}}
                         <div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false"
                             tabindex="-1" aria-hidden="true">
