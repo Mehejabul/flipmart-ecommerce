@@ -15,15 +15,15 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('product_id');
-            $table->string('product_name',50);
+            $table->string('product_name',200);
             $table->integer('pro_cate_id');
             $table->integer('brand_id');
             $table->string('product_price');
             $table->string('product_discount_price')->nullable();
             $table->string('product_unit');
             $table->string('product_quantity');
-            $table->text('product_details')->nullable();
-            $table->text('product_description')->nullable();
+            $table->longText('product_details')->nullable();
+            $table->longText('product_description')->nullable();
             $table->string('product_image',50)->nullable();
             $table->text('product_gallery')->nullable();
             $table->integer('product_feature')->default(0);

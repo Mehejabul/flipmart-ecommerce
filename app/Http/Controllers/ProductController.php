@@ -46,22 +46,21 @@ class ProductController extends Controller
       ],[
           'product_name.required' =>'Please Inesrt Product Name',
       ]);
+      //Product Image
+      if($request->hasfile('product_image')){
+            $main_image = $request->file('product_image');
+            $main_image_name = 'product' . time().rand(10000,100000) . '.' . $main_image->getClientOriginalExtension();
+            Image::make($main_image)->resize(250,250)->save('uploads/product/' . $main_image_name);
+        }
 
         //Multiple Image
         if($request->hasfile('product_gallery')){
             $gallerys = $request->file('product_gallery');
             foreach($gallerys as $gallery){
-                $gallery_name = 'pro' . '-' . rand(10000,10000) . '.' . $gallery->getClientOriginalExtension();
+                $gallery_name = 'pro' . '-' . rand(10000,100000) . '.' . $gallery->getClientOriginalExtension();
                 Image::make($gallery)->resize(120,120)->save('uploads/product/gallery/' . $gallery_name);
-                $data[] = $gallery_name;
+                $gal_data[] = $gallery_name;
             }
-        }
-
-         //Product Image
-         if($request->hasfile('product_image')){
-            $image = $request->file('product_image');
-            $product_img = 'product' . time() . '.' . $image->getClientOriginalExtension();
-            Image::make($image)->resize(250,250)->save('uploads/product/' . $product_img);
         }
 
         //PRODUCT Feature
@@ -83,8 +82,8 @@ class ProductController extends Controller
             'product_quantity' => $request->product_quantity,
             'product_details' => $request->product_details,
             'product_description' => $request->product_description,
-            'product_image' => $product_img,
-            'product_gallery' => implode(',', $data),
+            'product_image' => $main_image_name,
+            'product_gallery' => implode(',',$gal_data),
             'product_feature' => $product_feature,
             'product_order' => $request->product_order,
             'product_creator' => $creator,

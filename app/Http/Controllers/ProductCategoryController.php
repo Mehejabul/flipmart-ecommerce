@@ -40,7 +40,7 @@ class ProductCategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
-       // dd($request->all());
+        // return $request->all();
         $this->validate($request,[
             'pro_cate_name' => ['required'],
 
@@ -53,14 +53,14 @@ class ProductCategoryController extends Controller
          //Category Image
                 if($request->hasfile('pro_cate_image')){
                  $image = $request->file('pro_cate_image');
-                 $category_img = 'category_img' . time() . '.' . $image->getClientOriginalExtension();
+                 $category_img = 'category_img' . time().rand(10000,100000) . '.' . $image->getClientOriginalExtension();
                  Image::make($image)->resize(250,250)->save('uploads/category/image/' . $category_img);
              }
 
          //Category Icon
               if($request->hasfile('pro_cate_icon')){
                 $image = $request->file('pro_cate_icon');
-                $category_icon = 'category_icon' . time() . '.' . $image->getClientOriginalExtension();
+                $category_icon = 'category_icon' . time() . rand(10000,100000). '.' . $image->getClientOriginalExtension();
                 Image::make($image)->resize(250,250)->save('uploads/category/icon/' . $category_icon);
             }
 
@@ -103,9 +103,9 @@ class ProductCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($slug){
-    $data = ProductCategory::where('pro_cate_status',1)->where('pro_cate_slug', $slug)->firstorFail();
-        return view('admin.category.edite',compact('data'));
+    public function edit( $slug){
+        $category_data = ProductCategory::where('pro_cate_status', 1)->where('pro_cate_slug',$slug)->firstorFail();
+        return view('admin.category.edite', compact('category_data'));
     }
 
     /**
@@ -119,14 +119,11 @@ class ProductCategoryController extends Controller
                // dd($request->all());
                $this->validate($request,[
                 'pro_cate_name' => ['required'],
-
             ],[
-
                 'pro_cate_name.required' => 'Please insert Category name'
-
             ]);
 
-            $category = ProductCategory::where('pro_cate_status',1)->firstorFail();
+            $category = ProductCategory::where('pro_cate_status', 1)->where('pro_cate_slug', $slug)->first();
              //Category Image
              if($request->hasfile('pro_cate_image')){
 
@@ -134,7 +131,7 @@ class ProductCategoryController extends Controller
               File::delete('uploads/category/image/' .$category->pro_cate_image);
              }
              $image = $request->file('pro_cate_image');
-             $category_img = 'category_img' . time() . '.' . $image->getClientOriginalExtension();
+             $category_img = 'category_img' . time().rand(10000,100000) . '.' . $image->getClientOriginalExtension();
              Image::make($image)->resize(250,250)->save('uploads/category/image/' . $category_img);
          }else{
               $category_img = $category->pro_cate_image;
@@ -147,7 +144,7 @@ class ProductCategoryController extends Controller
          File::delete('uploads/category/icon/' .$category->pro_cate_icon);
         }
            $image = $request->file('pro_cate_icon');
-           $category_icon = 'category_icon' . time() . '.' . $image->getClientOriginalExtension();
+           $category_icon = 'category_icon' . time().rand(10000,100000) . '.' . $image->getClientOriginalExtension();
            Image::make($image)->resize(250,250)->save('uploads/category/icon/' . $category_icon);
         }else{
             $category_icon = $category->pro_cate_icon;

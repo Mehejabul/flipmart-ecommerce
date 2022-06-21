@@ -38,24 +38,30 @@
                         <tr>
                             <td>
                                 @if($data->pro_cate_icon)
-                                <img id="category_icon_preview" src="{{ asset('uploads/category/icon/'.$data->pro_cate_icon) }}"
+                                <img  src="{{ asset('uploads/category/icon/'.$data->pro_cate_icon) }}"
                                 alt="icon_image" width="50px;">
                                 @else
-                                <img id="category_image_preview" src="{{ asset('uploads/no-entry.png') }}"
+                                <img  src="{{ asset('uploads/no-entry.png') }}"
                                 alt="icon_image" class="img-fluid rounded" width="100" />
                                 @endif
                             </td>
                             <td>
                                 @if($data->pro_cate_image)
-                                <img id="category_image_preview" src="{{ asset('uploads/category/image/'.$data->pro_cate_image) }}"
+                                <img  src="{{ asset('uploads/category/image/'.$data->pro_cate_image) }}"
                                 alt="category_image" width="100px;">
                                 @else
-                                <img id="category_image_preview" src="{{ asset('uploads/no-entry.png') }}"
+                                <img  src="{{ asset('uploads/no-entry.png') }}"
                                 alt="category_image" class="img-fluid rounded" width="100" />
                                 @endif
                             </td>
                             <td>{{ $data->pro_cate_name }}</td>
-                            <td>{{ $data->cat_parent->pro_cate_name}}</td>
+                            <td>
+                                @if ($data->pro_cate_parent)
+                                {{ $data->cat_parent->pro_cate_name}}
+                                @else
+                                <p>N/A</p>
+                                @endif
+                            </td>
                             <td>{{ $data->pro_cate_order }}</td>
                             <td>
                                 <div class="btn-group" role="group">
