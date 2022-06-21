@@ -49,8 +49,8 @@ class ProductController extends Controller
       //Product Image
       if($request->hasfile('product_image')){
             $main_image = $request->file('product_image');
-            $main_image_name = 'product' . time().rand(10000,100000) . '.' . $main_image->getClientOriginalExtension();
-            Image::make($main_image)->resize(250,250)->save('uploads/product/' . $main_image_name);
+            $main_image_name = 'product' . time() .rand(10000,100000) . '.' . $main_image->getClientOriginalExtension();
+            Image::make($main_image)->resize(250,250)->save('uploads/product/pro_img/' . $main_image_name);
         }
 
         //Multiple Image
@@ -134,6 +134,22 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+    public function softdelete($slug){
+          $softdelete = Product::where('product_status',1)->where('product_slug',$slug)->update([
+            'product_status' => 0,
+            'updated_at' => Carbon::now()->toDateTimestring(),
+     ]);
+
+     if($softdelete){
+           Session::flash('success','successfully Delete');
+             return redirect()->back();
+     }else{
+         Session::flash('error','Delete faild');
+        return redirect()->back();
+     }
+
     }
 
     /**

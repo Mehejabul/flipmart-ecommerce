@@ -43,7 +43,7 @@
                             <td>
                                 @if($data->product_image)
                                 <img id="product_image_preview"
-                                    src="{{ asset('uploads/product/'.$data->product_image) }}" alt="product_image"
+                                    src="{{ asset('uploads/product/pro_img/'.$data->product_image) }}" alt="product_image"
                                     width="50px;">
                                 @else
                                 <img id="product_image_preview" src="{{ asset('uploads/no-entry.png') }}"
@@ -74,15 +74,15 @@
                                         </li>
                                         <li>
                                             <a class="dropdown-item  btn-link delete-modal" href="#"
-                                                data-bs-toggle="modal" data-value="" data-bs-target="#deleteModal"> <i
+                                                data-bs-toggle="modal" data-value=""
+                                                data-bs-target="#deleteModal{{ $data->product_slug }}"> <i
                                                     class="dripicons-trash"></i> Delete
-                                             </a>
+                                            </a>
                                         </li>
                                     </ul>
                                 </div>
                             </td>
                         </tr>
-
                         <!-- sample modal content -->
                         <div id="myModal" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel"
                             aria-hidden="true" data-bs-scroll="true">
@@ -136,11 +136,11 @@
                                                 <input disabled class="form-control" type="text" name="product_unit"
                                                     value="{{ $data->product_unit }}">
                                             </div>
-                                            <div class="col-lg-6 my-2">
+                                            {{--  <div class="col-lg-6 my-2">
                                                 <label for="product_creator">Product Creator</label>
                                                 <input disabled class="form-control" type="text" name="product_creator"
                                                     value="{{ $data->creator->name }}">
-                                            </div>
+                                            </div>  --}}
                                             <div class="col-lg-6 my-2">
                                                 <label for="product_feature">Product feature</label>
                                                 <input disabled class="form-control" type="text" name="product_feature"
@@ -158,12 +158,14 @@
                                             </div>
                                             <div class="col-md-12 my-2 d-flex">
                                                 <img style="width: 100px" class="m-auto"
-                                                    src="{{ asset('uploads/product/'.$data->product_image) }}"
+                                                    src="{{ asset('uploads/product/pro_img/'.$data->product_image) }}"
                                                     alt="Product Image">
                                             </div>
+
                                             @php
                                             $images = explode(',',$data->product_gallery)
                                             @endphp
+
                                             @if ($data['product_gallery'])
                                             @foreach ($images as $val )
                                             <div class="col-md-3 my-2 d-flex">
@@ -184,8 +186,8 @@
                         </div><!-- /.modal -->
 
                         {{--  Modal  --}}
-                        <div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false"
-                            tabindex="-1" aria-hidden="true">
+                        <div class="modal fade" id="deleteModal{{ $data->product_slug }}" data-bs-backdrop="static"
+                            data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -197,7 +199,8 @@
                                         Do you really want to delete these records? This process cannot be undone.
                                     </div>
                                     <div class="modal-footer">
-                                        <a type="submit" href="#" class="btn btn-danger" name="delete_data">Yes,
+                                        <a type="submit" href="{{ route('product.softdelete', $data->product_slug) }}" class="btn btn-danger"
+                                            name="delete_data">Yes,
                                             delete it
                                         </a>
                                         <a type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</a>

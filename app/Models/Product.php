@@ -21,7 +21,7 @@ class Product extends Model
     }
 
     public function creator(){
-        return $this->hasOne(User::class, 'id', 'product_id');
+        return $this->hasOne(user::class, 'id', 'product_id');
     }
     public function editor(){
         return $this->hasOne(User::class, 'id', 'product_id');
