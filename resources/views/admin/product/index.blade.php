@@ -136,11 +136,11 @@
                                                 <input disabled class="form-control" type="text" name="product_unit"
                                                     value="{{ $data->product_unit }}">
                                             </div>
-                                            {{--  <div class="col-lg-6 my-2">
+                                            <div class="col-lg-6 my-2">
                                                 <label for="product_creator">Product Creator</label>
                                                 <input disabled class="form-control" type="text" name="product_creator"
                                                     value="{{ $data->creator->name }}">
-                                            </div>  --}}
+                                            </div>
                                             <div class="col-lg-6 my-2">
                                                 <label for="product_feature">Product feature</label>
                                                 <input disabled class="form-control" type="text" name="product_feature"

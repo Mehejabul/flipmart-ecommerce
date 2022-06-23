@@ -55,6 +55,8 @@ class ProductCategoryController extends Controller
                  $image = $request->file('pro_cate_image');
                  $category_img = 'category_img' . time().rand(10000,100000) . '.' . $image->getClientOriginalExtension();
                  Image::make($image)->resize(250,250)->save('uploads/category/image/' . $category_img);
+             }else{
+                $category_img = '';
              }
 
          //Category Icon
@@ -62,6 +64,8 @@ class ProductCategoryController extends Controller
                 $image = $request->file('pro_cate_icon');
                 $category_icon = 'category_icon' . time() . rand(10000,100000). '.' . $image->getClientOriginalExtension();
                 Image::make($image)->resize(250,250)->save('uploads/category/icon/' . $category_icon);
+            }else{
+                $category_icon = '';
             }
 
     $insert = ProductCategory::InsertGetId([

@@ -11,6 +11,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\CuponController;
 use App\Http\Controllers\ManageController;
+use App\Http\Controllers\CartController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,6 +30,17 @@ use App\Http\Controllers\ManageController;
 //websiteController
 
 Route::get('/',[WebsiteController::class,'index'])->name('website.index');
+
+
+
+//add-to-cart-Routelist
+Route::group(['prefix' => 'cart'], function(){
+
+Route::get('/',[CartController::class,'index'])->name('cart.index');
+Route::get('/{slug}',[CartController::class,'store'])->name('cart.store');
+Route::get('/delete/{id}',[CartController::class,'delete'])->name('cart.delete');
+
+});
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
@@ -109,26 +121,7 @@ Route::put('/cupon/{slug}',[CuponController::class,'update'])->name('cupon.updat
 Route::get('/cupon/softdelete/{slug}',[CuponController::class,'softdelete'])->name('cupon.softdelete');
 Route::delete('/cupon/{slug}',[CuponController::class,'delete'])->name('cupon.delete');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 });
-
 // Basic setting route list
 Route::get('/basic-setting',[ManageController::class,'basic_index'])->name('manage.basic.index');
 Route::post('/basic-setting',[ManageController::class,'basic_update'])->name('manage.basic.upate');
@@ -140,4 +133,6 @@ Route::post('/contact-info',[ManageController::class,'contact_update'])->name('m
 //Social Info Route List
 Route::get('/social-info',[ManageController::class,'social_index'])->name('manage.social.index');
 Route::post('/social-info',[ManageController::class,'social_update'])->name('manage.social.upate');
+
+
 require __DIR__.'/auth.php';

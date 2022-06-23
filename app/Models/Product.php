@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-
-    use HasFactory;
     protected $guarded = [];
 
     public function category(){
@@ -21,8 +19,9 @@ class Product extends Model
     }
 
     public function creator(){
-        return $this->hasOne(user::class, 'id', 'product_id');
+        return $this->hasOne(User::class, 'id', 'product_creator');
     }
+
     public function editor(){
         return $this->hasOne(User::class, 'id', 'product_id');
     }

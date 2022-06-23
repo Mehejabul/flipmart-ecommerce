@@ -9,7 +9,7 @@ class ProductCategory extends Model
 {
     use HasFactory;
 
-    use HasFactory;
+
     protected $guarded = [];
 
     public function cat_parent(){
