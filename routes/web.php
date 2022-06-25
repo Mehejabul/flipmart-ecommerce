@@ -12,6 +12,7 @@ use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\CuponController;
 use App\Http\Controllers\ManageController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\WishListController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,6 +41,12 @@ Route::get('/',[CartController::class,'index'])->name('cart.index');
 Route::get('/{slug}',[CartController::class,'store'])->name('cart.store');
 Route::get('/delete/{id}',[CartController::class,'delete'])->name('cart.delete');
 
+});
+
+Route::group(['prefix'=>'wishlist'], function(){
+   Route::get('/',[WishListController::class,'index'])->name('wishlist.index');
+   Route::get('/{slug}',[WishListController::class,'store'])->name('wishlist.store');
+   Route::get('/delete/{id}',[WishListController::class,'delete'])->name('wishlist.delete');
 });
 
 // Route::get('/dashboard', function () {
