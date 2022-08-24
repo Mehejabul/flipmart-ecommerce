@@ -43,6 +43,12 @@ class ProductController extends Controller
 
       $this->validate($request,[
         'product_name' => ['required'],
+        'pro_cate_id' => ['required'],
+        'brand_id' => ['required'],
+        'product_price' => ['required'],
+        'product_quantity' => ['required'],
+         'product_image' => ['required'],
+
       ],[
           'product_name.required' =>'Please Inesrt Product Name',
       ]);
@@ -61,6 +67,8 @@ class ProductController extends Controller
                 Image::make($gallery)->resize(120,120)->save('uploads/product/gallery/' . $gallery_name);
                 $gal_data[] = $gallery_name;
             }
+        }else{
+            $gal_data[] = " ";
         }
 
         //PRODUCT Feature

@@ -177,6 +177,7 @@
 <!-- JavaScripts placed at the end of the document so the pages load faster -->
 <script src="{{ asset('contents/forntend') }}/assets/js/jquery-1.11.1.min.js"></script>
 <script src="{{ asset('contents/forntend') }}/assets/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="{{ asset('contents/forntend') }}/assets/js/bootstrap-hover-dropdown.min.js"></script>
 <script src="{{ asset('contents/forntend') }}/assets/js/owl.carousel.min.js"></script>
 <script src="{{ asset('contents/forntend') }}/assets/js/echo.min.js"></script>
@@ -187,6 +188,7 @@
 <script src="{{ asset('contents/forntend') }}/assets/js/bootstrap-select.min.js"></script>
 <script src="{{ asset('contents/forntend') }}/assets/js/wow.min.js"></script>
 <script src="{{ asset('contents/forntend') }}/assets/js/scripts.js"></script>
+@yield('footerScript')
 </body>
 
 <!-- Mirrored from www.themesground.com/flipmart-demo/HTML/home.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 May 2022 09:59:52 GMT -->

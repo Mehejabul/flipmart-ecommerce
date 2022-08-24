@@ -88,6 +88,7 @@ class ProductCategoryController extends Controller
             Session::flash('error', 'Opps! something errror');
             return redirect()->back();
      }
+
     }
 
     /**

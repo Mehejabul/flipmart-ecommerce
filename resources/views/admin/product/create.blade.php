@@ -50,12 +50,17 @@
                                 <div class="mb-3">
                                     <label class="form-label"><strong class="text-primary">Product Name<span
                                                 class="text-danger">*</span>:</strong></label>
-                                    <input type="text" class="form-control" name="product_name"
+                                    <input type="text" class="form-control @error('product_name') is-invalid @enderror" name="product_name"
                                         value="{{ old('product_name') }}">
                                 </div>
-                                @if ($errors->has('product_name'))
+                                @error('product_name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                {{--  @if ($errors->has('product_name'))
                                 <span class="error text-danger">{{ $errors->first('product_name') }}</span>
-                                @endif
+                                @endif  --}}
                             </div>
                         </div>
                         @php
@@ -105,12 +110,14 @@
                                 <div class="mb-3">
                                     <label class="form-label"><strong class="text-primary">Product Price:<span
                                                 class="text-danger">*</span>:</strong></label>
-                                    <input type="text" class="form-control" name="product_price"
+                                    <input type="text" class="form-control @error('product_price') is-invalid @enderror" name="product_price"
                                         value="{{ old('product_price') }}">
                                 </div>
-                                @if ($errors->has('product_price'))
-                                <span class="error text-danger">{{ $errors->first('product_price') }}</span>
-                                @endif
+                                @error('product_name')
+                                  <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                  </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-lg-6 my-2">
@@ -141,12 +148,14 @@
                             <div class="form-group" {{$errors->has('product_quantity') ? ' has-error':''}}>
                                 <div class="mb-3">
                                     <label class="form-label"><strong class="text-primary">Product Quantity:</strong></label>
-                                    <input type="text" class="form-control" name="product_quantity"
+                                    <input type="text" class="form-control @error('product_quantity') is-invalid @enderror" name="product_quantity"
                                         value="{{ old('product_quantity') }}">
                                 </div>
-                                @if ($errors->has('product_quantity'))
-                                <span class="error text-danger">{{ $errors->first('product_quantity') }}</span>
-                                @endif
+                                @error('product_quantity')
+                                  <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                  </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-lg-6 my-2">
@@ -156,9 +165,7 @@
                                     <input type="number" class="form-control" name="product_order"
                                         value="{{ old('product_order') }}">
                                 </div>
-                                @if ($errors->has('product_order'))
-                                <span class="error text-danger">{{ $errors->first('product_order') }}</span>
-                                @endif
+
                             </div>
                         </div>
                             <div class="col-lg-6 my-4">
@@ -172,12 +179,14 @@
                                     <div class="form-group" {{$errors->has('product_image') ? ' has-error':''}}>
                                         <div class="mb-3">
                                             <label class="form-label"><strong class="text-primary">Product Image</strong></label>
-                                            <input type="file" id="product_image_input" class="form-control"
+                                            <input type="file" id="product_image_input" class="form-control @error('product_quantity') is-invalid @enderror"
                                                 name="product_image" value="{{ old('product_image') }}">
                                         </div>
-                                        @if ($errors->has('product_image'))
-                                        <span class="error text-danger">{{ $errors->first('product_image') }}</span>
-                                        @endif
+                                        @error('product_quantity')
+                                            <span class="invalid-feedback" role="alert">
+                                               <strong>{{ $message }}</strong>
+                                             </span>
+                                         @enderror
                                     </div>
                             </div>
                         </div>

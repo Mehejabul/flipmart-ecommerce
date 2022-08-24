@@ -3,7 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\User;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\str;
+use Illuminate\Validation\Rules;
 class WebsiteController extends Controller
 {
     /**
@@ -11,73 +17,68 @@ class WebsiteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
+    public function index()
+    {
+
     return view('website.home');
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function login()
     {
-        //
+        return view('website.login.login');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function user_access(Request $request) {
+        if(User::where('email',$request->email)->exists()){
+            $db_pass = User::where('email',$request->email)->first();
+            if(Hash::check($request->password,$db_pass->password)){
+                return redirect('/');
+            }else{
+                return back()->with('Password_wrong',"Your Passsword Incorrect!");
+            }
+        }else{
+            return back()->with('WrongMail',"Your Email Incorrect!");
+        }
+
+// if (User::where('email',$request->email)->exists()) {
+//       $db_pass = User::where('email',$request->email)->first()->password;
+//         if (Hash::check($request->password,$db_pass)) {
+//           if (Auth::attempt($request->except('_token'))) {
+//           return redirect()->intended('/');
+
+//         }else {
+//           return back()->with('customer_login_errors','Your Email Or Password Worng!');
+//         }
+//     }else {
+//       return back()->with('customer_login_error','Your Email Address Not Found!');
+//     }
+
+  }
+
+
+
+
+    public function user_regestation(Request $request)
     {
-        //
+    //    dd($request->all());
+        // $request->validate([
+        //     'name' => ['required', 'string', 'max:255'],
+        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        //     'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        // ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'slug' => Str::slug('u'. $request->name .'-'),
+            'password' => Hash::make($request->password),
+        ]);
+
+        Auth::login($user);
+        return redirect()->back();
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

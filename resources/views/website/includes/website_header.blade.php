@@ -11,12 +11,14 @@
     <meta name="author" content="">
     <meta name="keywords" content="MediaCenter, Template, eCommerce">
     <meta name="robots" content="all">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Flipmart premium HTML5 & CSS3 Template</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="{{ asset('contents/forntend') }}/assets/css/bootstrap.min.css">
 
     <!-- Customizable CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('contents/forntend') }}/assets/css/main.css">
     <link rel="stylesheet" href="{{ asset('contents/forntend') }}/assets/css/blue.css">
     <link rel="stylesheet" href="{{ asset('contents/forntend') }}/assets/css/owl.carousel.css">
@@ -51,7 +53,7 @@
                             <li><a href="{{ route('cart.index') }}"><i class="icon fa fa-shopping-cart"></i>My Cart</a>
                             </li>
                             <li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li>
-                            <li><a href="#"><i class="icon fa fa-lock"></i>Login</a></li>
+                            <li><a href="{{ route('website.login') }}"><i class="icon fa fa-lock"></i>Login</a></li>
                         </ul>
                     </div>
                     <!-- /.cnt-account -->
@@ -164,7 +166,7 @@
                                                 </h3>
                                                 <div class="price">{{ $cart_data->price }}</div>
                                             </div>
-                                            <div class="col-xs-1 action"> <a href="#"><i class="fa fa-trash"></i></a>
+                                            <div class="col-xs-1 action"> <a href="{{ route('cart.delete',$cart_data->id)}}"><i class="fa fa-trash"></i></a>
                                             </div>
                                         </div>
                                         @endforeach

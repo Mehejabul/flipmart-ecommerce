@@ -50,9 +50,9 @@
                                             </tr>
                                         </tfoot>
                                         <tbody>
-                                            @foreach ($cartdatas as $cart)
+                                            @foreach ($cart_products as $cart)
                                             <tr>
-                                                <td class="romove-item"><a href="#" title="cancel" class="icon"><i
+                                                <td class="romove-item"><a href="{{ route('cart.delete',$cart->id) }}" title="cancel" class="icon"><i
                                                             class="fa fa-trash-o"></i></a></td>
                                                 <td class="cart-image">
                                                     <a class="entry-thumbnail" href="detail.html">
@@ -99,6 +99,8 @@
                                     </table><!-- /table -->
                                 </div>
                             </div><!-- /.shopping-cart-table -->
+
+
                             <div class="col-md-4 col-sm-12 estimate-ship-tax">
                                 <table class="table">
                                     <thead>
@@ -198,8 +200,8 @@
                                         <tr>
                                             <td>
                                                 <div class="cart-checkout-btn pull-right">
-                                                    <button type="submit" class="btn btn-primary checkout-btn">PROCCED
-                                                        TO CHEKOUT</button>
+                                                    <a href="{{ route('checkout') }}" type="submit" class="btn btn-primary checkout-btn">PROCCED
+                                                        TO CHEKOUT</a>
                                                     <span class="">Checkout with multiples address!</span>
                                                 </div>
                                             </td>

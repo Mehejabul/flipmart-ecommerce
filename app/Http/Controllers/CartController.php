@@ -10,8 +10,8 @@ class CartController extends Controller{
 
     public function index()
     {
-        $cartdatas = Cart::getContent();
-        return view("website.cart.shoping_cart", compact('cartdatas'));
+        $cart_products = Cart::getContent();
+        return view("website.cart.shoping_cart", compact('cart_products'));
 
     }
 
@@ -23,12 +23,17 @@ class CartController extends Controller{
             'id' => $cart_product->product_id,
             'name' => $cart_product->product_name,
             'price' => $cart_product->product_discount_price,
-            'quantity' => $cart_product->product_quantity,
+            'quantity' => 1,
             'attributes' => [
-                'product_image' => $cart_product->product_image,
+            'product_image' => $cart_product->product_image,
             ]
         ));
         return redirect()->back();
     }
+
+public function delete($id){
+    Cart::remove($id);
+    return redirect()->back();
+}
 
 }

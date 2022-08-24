@@ -4,6 +4,31 @@ jQuery(document).ready(function() {
 /*===================================================================================*/
 /*	OWL CAROUSEL
 /*===================================================================================*/
+// Country Search
+$('#country').select2();
+// City Search
+$('#city_list').select2();
+// Ajax Select To change Query
+$('#country').change(function(){
+    var country_id = $(this).val();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '/citypass',
+        data: {country_id:country_id},
+        success: function(data){
+            $('#city_list').html(data);
+        }
+
+    });
+
+});
+// Ajax Select To change Query End
+
 jQuery(function () {
     var dragging = true;
     var owlElementID = "#owl-main";
@@ -221,7 +246,7 @@ jQuery(".brand-slider").owlCarousel({
     pagination: false,
     paginationSpeed : 400,
     navigationText: ["", ""]
-});    
+});
 jQuery("#advertisement").owlCarousel({
     items : 1,
     itemsDesktopSmall :[979,2],
@@ -231,7 +256,7 @@ jQuery("#advertisement").owlCarousel({
     pagination: true,
     paginationSpeed : 400,
     navigationText: ["", ""]
-});    
+});
 
 
 
@@ -311,7 +336,7 @@ jQuery(function(){
         pagination: true
     });
 
-  
+
 });
 
 
@@ -319,7 +344,7 @@ jQuery(function(){
 
 
 /*===================================================================================*/
-/*  WOW 
+/*  WOW
 /*===================================================================================*/
 
 jQuery(function () {
@@ -328,9 +353,9 @@ jQuery(function () {
 
 
 /*===================================================================================*/
-/*  TOOLTIP 
+/*  TOOLTIP
 /*===================================================================================*/
-jQuery("[data-toggle='tooltip']").tooltip(); 
+jQuery("[data-toggle='tooltip']").tooltip();
 
 
 

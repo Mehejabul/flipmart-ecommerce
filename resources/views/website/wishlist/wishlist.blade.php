@@ -72,17 +72,4 @@
             </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
             @include('website.includes.website_footer')

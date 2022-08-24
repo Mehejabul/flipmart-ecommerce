@@ -12,6 +12,7 @@ use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\CuponController;
 use App\Http\Controllers\ManageController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\WishListController;
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +32,13 @@ use App\Http\Controllers\WishListController;
 //websiteController
 
 Route::get('/',[WebsiteController::class,'index'])->name('website.index');
+Route::get('/user-login',[WebsiteController::class,'login'])->name('website.login');
+Route::post('user-access',[WebsiteController::class,'user_access'])->name('website.user.access');
+Route::post('/user-regestation',[WebsiteController::class,'user_regestation'])->name('website.user.regestation');
 
+Route::get('proced/to/checkout',[CheckOutController::class,'index'])->name('checkout');
+Route::post('checkout',[CheckOutController::class,'billingInformation'])->name('billing_information');
+Route::post('/citypass',[CheckOutController::class,'CountryChnagewithAjax']);
 
 
 //add-to-cart-Routelist
@@ -42,6 +49,11 @@ Route::get('/{slug}',[CartController::class,'store'])->name('cart.store');
 Route::get('/delete/{id}',[CartController::class,'delete'])->name('cart.delete');
 
 });
+
+//checkout routelist
+// Route::group(['prefix' =>'checkout'],function(){
+//     Route::get('/')
+// })
 
 Route::group(['prefix'=>'wishlist'], function(){
    Route::get('/',[WishListController::class,'index'])->name('wishlist.index');
